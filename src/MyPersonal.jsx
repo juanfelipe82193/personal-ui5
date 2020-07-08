@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useRef } from "react";
+import Media from "react-media"
 import {
     Card,
     Avatar,
@@ -78,7 +79,7 @@ export function MyPersonal() {
         "SAPUI5/SAP Fiori"
     ]
     const switchToChart = toggleCharts === "barChart" ? "Bar Chart" : "Radar Chart"
-    return <div>
+    return (<div>
          <ShellBar 
             logo = {'https://developers.sap.com/dam/application/shared/logos/sap-logo-svg.svg.adapt.svg/1493030643828.svg'}
             profile = {
@@ -121,33 +122,67 @@ export function MyPersonal() {
                     <StandardListItem description="Bogotá, Colombia">Location</StandardListItem>
                 </List>
             </Card>
-            <Card
-                    heading = "Skills"
-                    subheading = {`Click here to switch to ${switchToChart}`}
-                    avatar = {<Icon name = { "vertical-bar-chart" }/>}
-                    onHeaderClick = {handleHeaderClick}
-                    headerInteractive = { Boolean('headerInteractive', true) }
-                    style = {{ 
-                        width: '500px', ...spacing.sapUiContentPadding
-                    }}
-                >
-                    {toggleCharts === "barChart" ? (
-                        <RadarChart 
-                            datasets = {datasets}
-                            labels = {labels}
-                            loading = {loading}
-                            style = {{ width: '500px' }}
-                        />
+            <Media queries = {{ mobile: "(max-width: 420px)" }}>
+                {matches =>
+                    matches.mobile ? (
+                        <Card
+                            heading = "Skills"
+                            subheading = {`Click here to switch to ${switchToChart}`}
+                            avatar = {<Icon name = { "vertical-bar-chart" }/>}
+                            onHeaderClick = {handleHeaderClick}
+                            headerInteractive = { Boolean('headerInteractive', true) }
+                            style = {{
+                                width: '340px', ...spacing.sapUiContentPadding
+                            }}
+                        >
+                            {toggleCharts === "barChart" ? (
+                                <RadarChart 
+                                    datasets = {datasets}
+                                    labels = {labels}
+                                    loading = {loading}
+                                    style = {{ width: '500px' }}
+                                />
+                            ) : (
+                                <BarChart 
+                                    datasets = {datasets}
+                                    labels = {labels}
+                                    loading = {loading}
+                                    style = {{ width: '500px' }}
+                                />
+                            )
+                            }
+                        </Card>
                     ) : (
-                        <BarChart 
-                            datasets = {datasets}
-                            labels = {labels}
-                            loading = {loading}
-                            style = {{ width: '500px' }}
-                        />
+                        <Card
+                            heading = "Skills"
+                            subheading = {`Click here to switch to ${switchToChart}`}
+                            avatar = {<Icon name = { "vertical-bar-chart" }/>}
+                            onHeaderClick = {handleHeaderClick}
+                            headerInteractive = { Boolean('headerInteractive', true) }
+                            style = {{ 
+                                width: '500px', ...spacing.sapUiContentPadding
+                            }}
+                        >
+                            {toggleCharts === "barChart" ? (
+                                <RadarChart 
+                                    datasets = {datasets}
+                                    labels = {labels}
+                                    loading = {loading}
+                                    style = {{ width: '500px' }}
+                                />
+                            ) : (
+                                <BarChart 
+                                    datasets = {datasets}
+                                    labels = {labels}
+                                    loading = {loading}
+                                    style = {{ width: '500px' }}
+                                />
+                            )
+                            }
+                        </Card>
                     )
-                    }
-                </Card>
+                }
+            </Media>
             <Card
                 style = {{ width: '610px', ...spacing.sapUiContentPadding }}
                 heading = 'Job Experience'
@@ -197,214 +232,436 @@ export function MyPersonal() {
                     </TimelineItem>
                 </Timeline>
             </Card>
-            <Card
-                heading = 'Courses & Certifications'
-                subheading = 'List'
-                style = {{ width: "600px", ...spacing.sapUiContentPadding }}
-                avatar = {<Icon name = "approvals"/>}
-            >
-                <List>
-                    <StandardListItem 
-                        info = 'In progress' 
-                        infoState = {ValueState.Warning} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>SAP Fiori Overview - Design, Develop and Deploy</Title>
-                        <Title level = {TitleLevel.H6}>openSAP</Title>
-                        <ProgressIndicator 
-                            displayValue = "90%"
-                            percentValue = {90}
-                            width = '400px'
-                            state = {ValueState.Warning} 
-                        />
-                    </StandardListItem>
-                    <StandardListItem 
-                        info = 'Completed' 
-                        infoState = {ValueState.Success} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>Complete JavaScript Course 2020</Title>
-                        <Title level = {TitleLevel.H6}>Udemy | Issued Apr 2020</Title>
-                        <ProgressIndicator 
-                            displayValue = "100%"
-                            percentValue = {100}
-                            width = '400px'
-                            state = {ValueState.Success} 
-                        />
-                    </StandardListItem>
-                    <StandardListItem 
-                        info = 'Completed' 
-                        infoState = {ValueState.Success} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>UI Development with SAPUI5</Title>
-                        <Title level = {TitleLevel.H6}>SAP | Issued Oct 2019</Title>
-                        <ProgressIndicator 
-                            displayValue = "100%"
-                            percentValue = {100}
-                            width = '400px'
-                            state = {ValueState.Success} 
-                        />
-                    </StandardListItem>
-                    <StandardListItem 
-                        info = 'Completed' 
-                        infoState = {ValueState.Success} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>SAP User Experience Fundamentals</Title>
-                        <Title level = {TitleLevel.H6}>SAP | Issued Aug 2019</Title>
-                        <ProgressIndicator 
-                            displayValue = "100%"
-                            percentValue = {100}
-                            width = '400px'
-                            state = {ValueState.Success} 
-                        />
-                    </StandardListItem>
-                    <StandardListItem 
-                        info = 'Completed' 
-                        infoState = {ValueState.Success} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>SAP HCM Functional Consultant Advanced Level</Title>
-                        <Title level = {TitleLevel.H6}>CVOSOFT | Issued Dec 2018</Title>
-                        <ProgressIndicator 
-                            displayValue = "100%"
-                            percentValue = {100}
-                            width = '400px'
-                            state = {ValueState.Success} 
-                        />
-                    </StandardListItem>
-                    <StandardListItem 
-                        info = 'Completed' 
-                        infoState = {ValueState.Success} 
-                        style = {{ paddingTop: "50px", paddingBottom: "50px" }}
-                    >
-                        <Title level = {TitleLevel.H5}>SAP HCM Functional Consultant Beginner Level</Title>
-                        <Title level = {TitleLevel.H6}>CVOSOFT | Issued Aug 2018</Title>
-                        <ProgressIndicator 
-                            displayValue = "100%"
-                            percentValue = {100}
-                            width = '400px'
-                            state = {ValueState.Success} 
-                        />
-                    </StandardListItem>
-                    
-                </List>
-            </Card>
-            <Card
-                heading = "Projects"
-                subheading = "Table"
-                avatar = { <Icon name = {"sap-box"}/> }
-                style = {{width: '1250px', ...spacing.sapUiContentPadding}}
-            >
-                <Table
-                    columns = {
-                        <>
-                            <TableColumn style = {{ width: '200px' }}>
-                                <Label>Project Name</Label>
-                            </TableColumn>
-                            <TableColumn minWidth = {'250px'}>
-                                <Label>Company</Label>
-                            </TableColumn>
-                            <TableColumn minWidth = {'190px'}>
-                                <Label>Start Date</Label>
-                            </TableColumn>
-                            <TableColumn minWidth = {'120px'}>
-                                <Label>End Date</Label>
-                            </TableColumn>
-                            <TableColumn minWidth = {'300px'}>
-                                <Label>Description</Label>
-                            </TableColumn>
-                        </>
-                    }
-                >
-                    <TableRow>
-                        <TableCell>
-                            <Label>Payroll Stabilization</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Scotiabank</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>March 2020</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Current</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Special team to fix SAP Payroll issues in a Kanban Agile environment</Label>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <Label>STAFFIT Wave 9 Expansion</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Deloitte</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Sept 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Dec 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>STAFFIT App deployment for new LoB on Deloitte Italy and Greece</Label>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <Label>STAFFIT Release 2.1.3 Global Reports</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Deloitte</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Jun 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Sept 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>New Global BI Reports to enhance Reporting Experience for cluster Member Firms</Label>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <Label>STAFFIT Wave 8</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Deloitte</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Dec 2018</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>May 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Mediterranean, Middle East, Ireland, New Zealand and India)</Label>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <Label>STAFFIT Wave 7</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Deloitte</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Nov 2018</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>Apr 2019</Label>
-                        </TableCell>
-                        <TableCell>
-                            <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Europe and Germany)</Label>
-                        </TableCell>
-                    </TableRow>
-                </Table>
-            </Card>
+            <Media queries = {{ mobile: "(max-width: 420px)" }}>
+                {matches =>
+                    matches.mobile ? (
+                        <Card
+                            heading = 'Courses & Certifications'
+                            subheading = 'List'
+                            style = {{ width: "340px", ...spacing.sapUiContentPadding }}
+                            avatar = {<Icon name = "approvals"/>}
+                        >
+                            <List>
+                                <StandardListItem 
+                                    info = 'In progress' 
+                                    infoState = {ValueState.Warning} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>SAP Fiori Overview - Design, Develop and Deploy</Title>
+                                    <Title level = {TitleLevel.H6}>openSAP</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "90%"
+                                        percentValue = {90}
+                                        width = '200px'
+                                        state = {ValueState.Warning} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>Complete JavaScript Course 2020</Title>
+                                    <Title level = {TitleLevel.H6}>Udemy | Issued Apr 2020</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '200px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>UI Development with SAPUI5</Title>
+                                    <Title level = {TitleLevel.H6}>SAP | Issued Oct 2019</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '200px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>SAP User Experience Fundamentals</Title>
+                                    <Title level = {TitleLevel.H6}>SAP | Issued Aug 2019</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '200px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>SAP HCM Functional Consultant Advanced Level</Title>
+                                    <Title level = {TitleLevel.H6}>CVOSOFT | Issued Dec 2018</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '200px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5} wrap = {true}>SAP HCM Functional Consultant Beginner Level</Title>
+                                    <Title level = {TitleLevel.H6}>CVOSOFT | Issued Aug 2018</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '200px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                            </List>
+                        </Card>
+                    ) : (
+                        <Card
+                            heading = 'Courses & Certifications'
+                            subheading = 'List'
+                            style = {{ width: "600px", ...spacing.sapUiContentPadding }}
+                            avatar = {<Icon name = "approvals"/>}
+                        >
+                            <List>
+                                <StandardListItem 
+                                    info = 'In progress' 
+                                    infoState = {ValueState.Warning} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>SAP Fiori Overview - Design, Develop and Deploy</Title>
+                                    <Title level = {TitleLevel.H6}>openSAP</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "90%"
+                                        percentValue = {90}
+                                        width = '400px'
+                                        state = {ValueState.Warning} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>Complete JavaScript Course 2020</Title>
+                                    <Title level = {TitleLevel.H6}>Udemy | Issued Apr 2020</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '400px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>UI Development with SAPUI5</Title>
+                                    <Title level = {TitleLevel.H6}>SAP | Issued Oct 2019</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '400px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>SAP User Experience Fundamentals</Title>
+                                    <Title level = {TitleLevel.H6}>SAP | Issued Aug 2019</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '400px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>SAP HCM Functional Consultant Advanced Level</Title>
+                                    <Title level = {TitleLevel.H6}>CVOSOFT | Issued Dec 2018</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '400px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                                <StandardListItem 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
+                                    style = {{ paddingTop: "50px", paddingBottom: "50px" }}
+                                >
+                                    <Title level = {TitleLevel.H5}>SAP HCM Functional Consultant Beginner Level</Title>
+                                    <Title level = {TitleLevel.H6}>CVOSOFT | Issued Aug 2018</Title>
+                                    <ProgressIndicator 
+                                        displayValue = "100%"
+                                        percentValue = {100}
+                                        width = '400px'
+                                        state = {ValueState.Success} 
+                                    />
+                                </StandardListItem>
+                            </List>
+                        </Card>
+                    )
+                }
+            </Media>
+            <Media queries = {{ mobile: "(max-width: 420px)" }} >
+                {matches =>
+                    matches.mobile ? (
+                        <Card
+                            heading = "Projects"
+                            subheading = "Table"
+                            avatar = { <Icon name = {"sap-box"}/> }
+                            style = {{width: '1250px', ...spacing.sapUiContentPadding, display: 'none'}}
+                        >
+                            <Table
+                                columns = {
+                                    <>
+                                        <TableColumn style = {{ width: '200px' }}>
+                                            <Label>Project Name</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'250px'}>
+                                            <Label>Company</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'190px'}>
+                                            <Label>Start Date</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'120px'}>
+                                            <Label>End Date</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'300px'}>
+                                            <Label>Description</Label>
+                                        </TableColumn>
+                                    </>
+                                }
+                            >
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>Payroll Stabilization</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Scotiabank</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>March 2020</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Current</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Special team to fix SAP Payroll issues in a Kanban Agile environment</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 9 Expansion</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Sept 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Dec 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT App deployment for new LoB on Deloitte Italy and Greece</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Release 2.1.3 Global Reports</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Jun 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Sept 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>New Global BI Reports to enhance Reporting Experience for cluster Member Firms</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 8</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Dec 2018</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>May 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Mediterranean, Middle East, Ireland, New Zealand and India)</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 7</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Nov 2018</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Apr 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Europe and Germany)</Label>
+                                    </TableCell>
+                                </TableRow>
+                            </Table>
+                        </Card>
+                    ) : (
+                        <Card
+                            heading = "Projects"
+                            subheading = "Table"
+                            avatar = { <Icon name = {"sap-box"}/> }
+                            style = {{width: '1250px', ...spacing.sapUiContentPadding}}
+                        >
+                            <Table
+                                columns = {
+                                    <>
+                                        <TableColumn style = {{ width: '200px' }}>
+                                            <Label>Project Name</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'250px'}>
+                                            <Label>Company</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'190px'}>
+                                            <Label>Start Date</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'120px'}>
+                                            <Label>End Date</Label>
+                                        </TableColumn>
+                                        <TableColumn minWidth = {'300px'}>
+                                            <Label>Description</Label>
+                                        </TableColumn>
+                                    </>
+                                }
+                            >
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>Payroll Stabilization</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Scotiabank</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>March 2020</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Current</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Special team to fix SAP Payroll issues in a Kanban Agile environment</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 9 Expansion</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Sept 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Dec 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT App deployment for new LoB on Deloitte Italy and Greece</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Release 2.1.3 Global Reports</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Jun 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Sept 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>New Global BI Reports to enhance Reporting Experience for cluster Member Firms</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 8</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Dec 2018</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>May 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Mediterranean, Middle East, Ireland, New Zealand and India)</Label>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Label>STAFFIT Wave 7</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Deloitte</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Nov 2018</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>Apr 2019</Label>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Europe and Germany)</Label>
+                                    </TableCell>
+                                </TableRow>
+                            </Table>
+                        </Card>
+                    )
+                }
+            </Media>
         </FlexBox>
-        </div>;
+        </div>
+        
+    )
 }
