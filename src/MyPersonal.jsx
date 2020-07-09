@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useRef } from "react";
-import Media from "react-media"
+import Media from "react-media";
 import {
     Card,
     Avatar,
@@ -34,6 +34,10 @@ import "@ui5/webcomponents-icons/dist/icons/calendar.js"
 import "@ui5/webcomponents-icons/dist/icons/approvals.js"
 import "@ui5/webcomponents-icons/dist/icons/vertical-bar-chart.js"
 import "@ui5/webcomponents-icons/dist/icons/sap-box.js"
+import "@ui5/webcomponents-icons/dist/icons/factory.js"
+import "@ui5/webcomponents-icons/dist/icons/email.js"
+import "@ui5/webcomponents-icons/dist/icons/map.js"
+import "@ui5/webcomponents-icons/dist/icons/search.js"
 import { spacing } from "@ui5/webcomponents-react-base"
 
 export function MyPersonal() {
@@ -79,13 +83,17 @@ export function MyPersonal() {
         "SAPUI5/SAP Fiori"
     ]
     const switchToChart = toggleCharts === "barChart" ? "Bar Chart" : "Radar Chart"
+    const sendMail = function () {
+        var yourMessage = "Hello Juan I would like to contacto you for ...";
+        var subject = "Contact";
+        document.location.href = "mailto:juan19_93@hotmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(yourMessage);
+    }
     return (<div>
          <ShellBar 
             logo = {'https://developers.sap.com/dam/application/shared/logos/sap-logo-svg.svg.adapt.svg/1493030643828.svg'}
             profile = {
                 <Avatar 
-                    icon = 'person-placeholder' 
-                    backgroundColor = {AvatarBackgroundColor.Accent6}
+                    icon = 'person-placeholder'
                     size = "XS"
                     shape = 'Circle'
                 />
@@ -94,7 +102,9 @@ export function MyPersonal() {
             secondaryTitle = 'Made with SAPUI5'
             showNotifications = {true}
             notificationCount = '1'
-            searchField = {<ui5-input slot="searchField" placeholer="Enter service..."></ui5-input>}
+            searchField = {
+                <ui5-input placeholder="Enter search criteria ..."/>
+            }
         />
         <FlexBox
             justifyContent = {FlexBoxJustifyContent.Center}
@@ -111,15 +121,31 @@ export function MyPersonal() {
                     />
                 }
                 heading = 'Juan Felipe Zorrilla'
-                subheading = 'Senior QAT SAP PAyroll Specialist'
+                subheading = 'Senior SAP Consultant'
                 style = {{ 
                     width: '500px', ...spacing.sapUiContentPadding
                 }}
             >
                 <List>
-                    <StandardListItem description="Scotiabank">Company</StandardListItem>
-                    <StandardListItem description="juan19_93@hotmail.com">Email</StandardListItem>
-                    <StandardListItem description="Bogotá, Colombia">Location</StandardListItem>
+                    <StandardListItem 
+                        description="Scotiabank"
+                        icon = "factory"
+                    >
+                        Company
+                    </StandardListItem>
+                    <StandardListItem 
+                        description="juan19_93@hotmail.com"
+                        icon = "email"
+                        onClick = {sendMail}
+                    >
+                        Email
+                    </StandardListItem>
+                    <StandardListItem 
+                        description="Bogotá, Colombia"
+                        icon = "map"
+                    >
+                    Location
+                    </StandardListItem>
                 </List>
             </Card>
             <Media queries = {{ mobile: "(max-width: 420px)" }}>
@@ -564,7 +590,7 @@ export function MyPersonal() {
                                         <TableColumn minWidth = {'120px'}>
                                             <Label>End Date</Label>
                                         </TableColumn>
-                                        <TableColumn minWidth = {'300px'}>
+                                        <TableColumn minWidth = {'250px'}>
                                             <Label>Description</Label>
                                         </TableColumn>
                                     </>
@@ -584,7 +610,7 @@ export function MyPersonal() {
                                         <Label>Current</Label>
                                     </TableCell>
                                     <TableCell>
-                                        <Label>Special team to fix SAP Payroll issues in a Kanban Agile environment</Label>
+                                        <Label wrap = {true}>Special team to fix SAP Payroll issues in a Kanban Agile environment</Label>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -601,12 +627,12 @@ export function MyPersonal() {
                                         <Label>Dec 2019</Label>
                                     </TableCell>
                                     <TableCell>
-                                        <Label>STAFFIT App deployment for new LoB on Deloitte Italy and Greece</Label>
+                                        <Label wrap = {true}>STAFFIT App deployment for new LoB on Deloitte Italy and Greece</Label>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
-                                        <Label>STAFFIT Release 2.1.3 Global Reports</Label>
+                                        <Label wrap = {true}>STAFFIT Release 2.1.3 Global Reports</Label>
                                     </TableCell>
                                     <TableCell>
                                         <Label>Deloitte</Label>
@@ -618,7 +644,7 @@ export function MyPersonal() {
                                         <Label>Sept 2019</Label>
                                     </TableCell>
                                     <TableCell>
-                                        <Label>New Global BI Reports to enhance Reporting Experience for cluster Member Firms</Label>
+                                        <Label wrap = {true}>New Global BI Reports to enhance Reporting Experience for cluster Member Firms</Label>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -635,7 +661,7 @@ export function MyPersonal() {
                                         <Label>May 2019</Label>
                                     </TableCell>
                                     <TableCell>
-                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Mediterranean, Middle East, Ireland, New Zealand and India)</Label>
+                                        <Label wrap = {true}>STAFFIT Deployment for new Deloitte Member Firms (Central Mediterranean, Middle East, Ireland, New Zealand and India)</Label>
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -652,7 +678,7 @@ export function MyPersonal() {
                                         <Label>Apr 2019</Label>
                                     </TableCell>
                                     <TableCell>
-                                        <Label>STAFFIT Deployment for new Deloitte Member Firms (Central Europe and Germany)</Label>
+                                        <Label wrap = {true}>STAFFIT Deployment for new Deloitte Member Firms (Central Europe and Germany)</Label>
                                     </TableCell>
                                 </TableRow>
                             </Table>
