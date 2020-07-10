@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState, useRef } from "react";
 import Media from "react-media";
+import '@ui5/webcomponents-theme-base/dist/Assets.js';
+import '@ui5/webcomponents/dist/generated/json-imports/Themes';
+import '@ui5/webcomponents-fiori/dist/generated/json-imports/Themes';
 import {
     Card,
     Avatar,
