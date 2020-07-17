@@ -28,14 +28,15 @@ import {
     Label,
     TableRow,
     TableCell,
-    Toast
+    Toast,
 } from "@ui5/webcomponents-react"
 import { RadarChart, BarChart } from "@ui5/webcomponents-react-charts";
 import "@ui5/webcomponents-icons/dist/icons/person-placeholder.js"
 import "@ui5/webcomponents-icons/dist/icons/business-card.js"
 import "@ui5/webcomponents-icons/dist/icons/calendar.js"
 import "@ui5/webcomponents-icons/dist/icons/approvals.js"
-import "@ui5/webcomponents-icons/dist/icons/vertical-bar-chart.js"
+import "@ui5/webcomponents-icons/dist/icons/horizontal-bar-chart.js"
+import "@ui5/webcomponents-icons/dist/icons/radar-chart.js"
 import "@ui5/webcomponents-icons/dist/icons/sap-box.js"
 import "@ui5/webcomponents-icons/dist/icons/factory.js"
 import "@ui5/webcomponents-icons/dist/icons/email.js"
@@ -156,8 +157,14 @@ export function MyPersonal() {
                     matches.mobile ? (
                         <Card
                             heading = "Skills"
-                            subheading = {`Click here to switch to ${switchToChart}`}
-                            avatar = {<Icon name = { "vertical-bar-chart" }/>}
+                            subheading = {`Click here to change chart`}
+                            avatar = {
+                                toggleCharts === "barChart" ? (
+                                    <Icon name = { "radar-chart" }/>
+                                ) : (
+                                    <Icon name = { "horizontal-bar-chart" }/>
+                                )
+                            }
                             onHeaderClick = {handleHeaderClick}
                             headerInteractive = { Boolean('headerInteractive', true) }
                             style = {{
@@ -184,8 +191,14 @@ export function MyPersonal() {
                     ) : (
                         <Card
                             heading = "Skills"
-                            subheading = {`Click here to switch to ${switchToChart}`}
-                            avatar = {<Icon name = { "vertical-bar-chart" }/>}
+                            subheading = {`Click here to change chart`}
+                            avatar = {
+                                toggleCharts === "barChart" ? (
+                                    <Icon name = { "radar-chart" }/>
+                                ) : (
+                                    <Icon name = { "horizontal-bar-chart" }/>
+                                )
+                            }
                             onHeaderClick = {handleHeaderClick}
                             headerInteractive = { Boolean('headerInteractive', true) }
                             style = {{ 
@@ -215,7 +228,7 @@ export function MyPersonal() {
             <Card
                 style = {{ width: '610px', ...spacing.sapUiContentPadding }}
                 heading = 'Job Experience'
-                subheading = '2017 to current year'
+                subheading = 'Timeline'
                 avatar = {
                     <Icon
                         name = {"business-card"}
@@ -272,17 +285,17 @@ export function MyPersonal() {
                         >
                             <List>
                                 <StandardListItem 
-                                    info = 'In progress' 
-                                    infoState = {ValueState.Warning} 
+                                    info = 'Completed'
+                                    infoState = {ValueState.Success} 
                                     style = {{ paddingTop: "50px", paddingBottom: "50px" }}
                                 >
                                     <Title level = {TitleLevel.H5} wrap = {true}>SAP Fiori Overview - Design, Develop and Deploy</Title>
                                     <Title level = {TitleLevel.H6}>openSAP</Title>
                                     <ProgressIndicator 
-                                        displayValue = "90%"
-                                        percentValue = {90}
+                                        displayValue = "100%"
+                                        percentValue = {100}
                                         width = '200px'
-                                        state = {ValueState.Warning} 
+                                        state = {ValueState.Success} 
                                     />
                                 </StandardListItem>
                                 <StandardListItem 
@@ -366,17 +379,17 @@ export function MyPersonal() {
                         >
                             <List>
                                 <StandardListItem 
-                                    info = 'In progress' 
-                                    infoState = {ValueState.Warning} 
+                                    info = 'Completed' 
+                                    infoState = {ValueState.Success} 
                                     style = {{ paddingTop: "50px", paddingBottom: "50px" }}
                                 >
                                     <Title level = {TitleLevel.H5}>SAP Fiori Overview - Design, Develop and Deploy</Title>
                                     <Title level = {TitleLevel.H6}>openSAP</Title>
                                     <ProgressIndicator 
-                                        displayValue = "90%"
-                                        percentValue = {90}
+                                        displayValue = "100%"
+                                        percentValue = {100}
                                         width = '400px'
-                                        state = {ValueState.Warning} 
+                                        state = {ValueState.Success} 
                                     />
                                 </StandardListItem>
                                 <StandardListItem 
