@@ -12,7 +12,6 @@ import {
     Timeline,
     TimelineItem,
     ShellBar,
-    ShellBarItem,
     ValueState,
     ProgressIndicator,
     Title,
@@ -20,8 +19,6 @@ import {
     FlexBox,
     FlexBoxJustifyContent,
     FlexBoxWrap,
-    FlexBoxDirection,
-    AvatarBackgroundColor,
     Icon,
     Table,
     TableColumn,
@@ -42,6 +39,8 @@ import "@ui5/webcomponents-icons/dist/icons/factory.js"
 import "@ui5/webcomponents-icons/dist/icons/email.js"
 import "@ui5/webcomponents-icons/dist/icons/map.js"
 import "@ui5/webcomponents-icons/dist/icons/search.js"
+import "@ui5/webcomponents-icons/dist/icons/syntax.js"
+
 import { spacing } from "@ui5/webcomponents-react-base"
 
 export function MyPersonal() {
@@ -86,7 +85,13 @@ export function MyPersonal() {
         "Frontend Dev",
         "SAPUI5/SAP Fiori"
     ]
-    const switchToChart = toggleCharts === "barChart" ? "Bar Chart" : "Radar Chart"
+    // const switchToChart = toggleCharts === "barChart" ? "Bar Chart" : "Radar Chart"
+
+    const sendRepo = function (e) {
+        e.preventDefault();
+        window.location.href='https://github.com/juanfelipe82193';
+    }
+
     const sendMail = function () {
         var yourMessage = "Hello Juan I would like to contacto you for ...";
         var subject = "Contact";
@@ -103,7 +108,7 @@ export function MyPersonal() {
                 />
             }
             primaryTitle = 'My Personal UI5'
-            secondaryTitle = 'Made with SAPUI5'
+            secondaryTitle = 'Made up with SAPUI5'
             showNotifications = {true}
             notificationCount = '1'
             searchField = {
@@ -132,7 +137,7 @@ export function MyPersonal() {
             >
                 <List>
                     <StandardListItem 
-                        description="Scotiabank"
+                        description="LafargeHolcim"
                         icon = "factory"
                     >
                         Company
@@ -149,6 +154,13 @@ export function MyPersonal() {
                         icon = "map"
                     >
                     Location
+                    </StandardListItem>
+                    <StandardListItem 
+                        description="Click here to see my github repo"
+                        icon = "syntax"
+                        onClick = {sendRepo}
+                    >
+                        Github
                     </StandardListItem>
                 </List>
             </Card>
