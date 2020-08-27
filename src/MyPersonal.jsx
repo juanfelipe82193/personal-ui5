@@ -150,7 +150,7 @@ export function MyPersonal() {
                         Email
                     </StandardListItem>
                     <StandardListItem 
-                        description="Bogotá, Colombia"
+                        description="Medellin, Colombia"
                         icon = "map"
                     >
                     Location
